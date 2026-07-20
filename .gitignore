@@ -1,0 +1,57 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+
+# Claude Code (sessões locais, não devem ir pro repo)
+.claude/projects/
+.claude/sessions/
+.claude/shell-snapshots/
+.claude/telemetry/
+.claude/file-history/
+.claude/backups/
+
+# As skills de design (impeccable, design-taste-frontend) SÃO versionadas —
+# vêm embutidas pra funcionar no clone, sem instalar nada. Ver
+# .claude/skills/PROCEDENCIA.md. Não adicionar elas aqui.
+
+# Skills instaladas via `npx skills add` (playwright-cli). O CLI grava em
+# .agents/skills/ e cria symlink em .claude/skills/.
+.agents/
+.claude/skills/playwright-cli
+skills-lock.json
+
+# Live mode da impeccable (config local de browser)
+.impeccable/
+
+# Dependências
+node_modules/
+
+# Arquivos temporários
+*.log
+*.tmp
+
+# Screenshots do frontend-design-evaluator
+eval-*.png
+
+# Drop zone do usuário (só o README vai versionado)
+dados/*
+!dados/README.md
+
+# ─── Next.js / app ───────────────────────────────────────────────
+/.next/
+/out/
+/build
+/coverage
+next-env.d.ts
+*.tsbuildinfo
+
+# env (Supabase keys etc — nunca versionar). O .env.example é template, vai versionado.
+.env*
+!.env.example
+
+# Vercel
+.vercel
