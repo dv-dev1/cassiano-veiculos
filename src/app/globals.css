@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Cassiano Veículos — design tokens
+   Fonte da verdade: identidade/design-guide.md + DESIGN.md
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #b56e35; /* Marrom Caramelo Premium */
+  --primary-hover: #9c5c29;
+  --secondary: #2f3136; /* Grafite Escuro */
+  --background: #f5f3ee; /* Cinza Areia claro */
+  --sand: #e7e4dd; /* Cinza Areia */
+  --surface: #ffffff; /* Branco */
+  --text: #222222; /* Texto de corpo */
+  --muted: #7c7c7c; /* Cinza médio */
+  --line: #d8d8d8; /* Cinza claro (bordas) */
+  --whatsapp: #25d366;
+  --whatsapp-hover: #1eb958;
+
+  --radius: 12px;
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.1);
+
+  /* Easing de assinatura capturado da referência (ease-out-expo) */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sand: var(--sand);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-hover: var(--whatsapp-hover);
+
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
+
+  --radius-brand: var(--radius);
+  --shadow-soft: var(--shadow-soft);
+  --ease-brand: var(--ease-brand);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--line);
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tipografia base */
+h1,
+h2,
+h3,
+h4 {
+  color: var(--secondary);
+  text-wrap: balance;
+  letter-spacing: -0.02em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Seleção */
+::selection {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Foco visível consistente */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Scroll reveal — visível por padrão, o reveal só realça.
+   (Nunca esconder conteúdo atrás de classe: headless/hidden-tab
+   nunca dispara o reveal e a seção sai em branco.)
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.7s var(--ease-brand),
+      transform 0.7s var(--ease-brand);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
