@@ -1,34 +1,52 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
 import { loja } from "@/lib/loja";
 
 /**
- * Logo da Cassiano. Wordmark tipográfico no estilo da marca (monograma CV +
- * nome) — placeholder fiel até o PNG oficial entrar em identidade/logo.png.
- * Quando o arquivo existir, trocar por <Image src="/logo.png" />.
+ * Logo oficial da Cassiano Veículos (versão fundo escuro: monograma CV
+ * caramelo + wordmark claro). Arquivo em public/logo-cassiano.png.
  *
- * `variant` controla a cor pra fundos claros (padrão) e escuros.
+ * Fallback: se o PNG ainda não existir, mostra um wordmark tipográfico
+ * no estilo da marca — o site nunca quebra. Assim que o arquivo for salvo,
+ * a logo real aparece.
  */
-export function Logo({ variant = "light" }: { variant?: "light" | "dark" }) {
-  const nameColor = variant === "dark" ? "text-white" : "text-secondary";
+export function Logo() {
+  const [imgOk, setImgOk] = useState(true);
+
   return (
     <Link
       href="/"
       aria-label={`${loja.nome} — página inicial`}
-      className="group inline-flex items-center gap-2.5"
+      className="group inline-flex items-center"
     >
-      <span
-        aria-hidden="true"
-        className="grid h-9 w-9 place-items-center rounded-[8px] bg-primary font-bold text-white transition-transform duration-300 ease-[var(--ease-brand)] group-hover:scale-105 motion-reduce:group-hover:scale-100"
-        style={{ letterSpacing: "-0.06em", fontSize: "15px" }}
-      >
-        CV
-      </span>
-      <span
-        className={`text-[15px] font-semibold uppercase leading-none tracking-[0.12em] ${nameColor}`}
-      >
-        Cassiano
-        <span className="text-primary"> Veículos</span>
-      </span>
+      {imgOk ? (
+        <Image
+          src="/logo-cassiano.png"
+          alt={loja.nome}
+          width={190}
+          height={52}
+          priority
+          onError={() => setImgOk(false)}
+          className="h-9 w-auto transition-transform duration-300 ease-[var(--ease-brand)] group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
+        />
+      ) : (
+        <span className="inline-flex items-center gap-2.5">
+          <span
+            aria-hidden="true"
+            className="grid h-9 w-9 place-items-center rounded-[8px] bg-primary font-bold text-white"
+            style={{ letterSpacing: "-0.06em", fontSize: "15px" }}
+          >
+            CV
+          </span>
+          <span className="text-[15px] font-semibold uppercase leading-none tracking-[0.12em] text-white">
+            Cassiano
+            <span className="text-primary"> Veículos</span>
+          </span>
+        </span>
+      )}
     </Link>
   );
 }

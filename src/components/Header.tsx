@@ -43,7 +43,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-5 sm:px-8">
-        <Logo variant="dark" />
+        <Logo />
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Principal">
           {navLinks.map((link) => (

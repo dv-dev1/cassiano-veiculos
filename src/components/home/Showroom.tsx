@@ -6,6 +6,7 @@ import {
   motion,
   useScroll,
   useTransform,
+  useMotionTemplate,
   useReducedMotion,
 } from "framer-motion";
 import { imagens } from "@/lib/loja";
@@ -28,12 +29,14 @@ export function Showroom() {
     offset: ["start end", "end start"],
   });
 
-  // A imagem expande de 70% → 100% da largura entre o início e o meio do scroll.
+  // A imagem expande de 72% → 100% entre o início e o meio do scroll.
+  // Usa transform string (GPU) em vez do shorthand `scale` (main-thread).
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.72, 1]);
-  const radius = useTransform(scrollYProgress, [0, 0.5], [24, 0]);
+  const imageTransform = useMotionTemplate`scale(${scale})`;
   // Texto some suave conforme a imagem toma a tela.
   const textOpacity = useTransform(scrollYProgress, [0.28, 0.5], [1, 0]);
-  const textScale = useTransform(scrollYProgress, [0.28, 0.5], [1, 1.08]);
+  const textZoom = useTransform(scrollYProgress, [0.28, 0.5], [1, 1.08]);
+  const textTransform = useMotionTemplate`scale(${textZoom})`;
 
   return (
     <section
@@ -46,11 +49,7 @@ export function Showroom() {
         {/* Painel sticky que segura a imagem enquanto a seção rola */}
         <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
         <motion.div
-          style={
-            reduce
-              ? undefined
-              : { scale, borderRadius: radius }
-          }
+          style={reduce ? undefined : { transform: imageTransform }}
           className="relative h-full w-full overflow-hidden will-change-transform"
         >
           <Image
@@ -65,8 +64,12 @@ export function Showroom() {
 
         {/* Texto sobreposto, some conforme a imagem toma conta */}
         <motion.div
-          style={reduce ? undefined : { opacity: textOpacity, scale: textScale }}
-          className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-5 text-center"
+          style={
+            reduce
+              ? undefined
+              : { opacity: textOpacity, transform: textTransform }
+          }
+          className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-5 text-center will-change-transform"
         >
           <h2 className="text-[clamp(2rem,5vw,3.75rem)] font-bold leading-tight text-white drop-shadow-[0_2px_28px_rgba(0,0,0,0.7)]">
             Entre no showroom
