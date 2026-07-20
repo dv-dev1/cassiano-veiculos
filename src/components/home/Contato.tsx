@@ -68,6 +68,8 @@ export function Contato() {
                     {loja.horario.semana}
                     <br />
                     {loja.horario.sabado}
+                    <br />
+                    {loja.horario.domingo}
                   </span>
                 </p>
               </div>
