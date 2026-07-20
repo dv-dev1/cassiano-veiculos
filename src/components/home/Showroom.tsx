@@ -13,11 +13,11 @@ import { imagens } from "@/lib/loja";
 import { Reveal } from "@/components/Reveal";
 
 /**
- * "Entre no showroom" — efeito de expansão scroll-driven: a imagem do
- * interior da concessionária começa contida (janela pro showroom) e cresce
- * até preencher a tela conforme a seção passa pela viewport, dando a
- * sensação de ENTRAR no showroom. Não sequestra o scroll da página — o
- * efeito é atado ao progresso natural de rolagem da própria seção.
+ * "Entre no showroom" — zoom cinematográfico scroll-driven: a imagem do
+ * interior da concessionária SEMPRE preenche a tela e dá um zoom pra dentro
+ * conforme a seção passa pela viewport, dando a sensação de ENTRAR/aproximar
+ * no showroom. A imagem nunca fica menor que a tela (sem bordas). Não
+ * sequestra o scroll — o efeito é atado ao progresso natural da rolagem.
  */
 export function Showroom() {
   const ref = useRef<HTMLDivElement>(null);
@@ -29,14 +29,16 @@ export function Showroom() {
     offset: ["start end", "end start"],
   });
 
-  // A imagem expande de 72% → 100% entre o início e o meio do scroll.
-  // Usa transform string (GPU) em vez do shorthand `scale` (main-thread).
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.72, 1]);
+  // Zoom pra dentro: começa ampliada (1.25) e assenta em 1.05 no fim — sempre
+  // ≥ 1, então a imagem nunca mostra borda. Transform string (GPU).
+  const scale = useTransform(scrollYProgress, [0, 1], [1.25, 1.05]);
   const imageTransform = useMotionTemplate`scale(${scale})`;
-  // Texto some suave conforme a imagem toma a tela.
-  const textOpacity = useTransform(scrollYProgress, [0.28, 0.5], [1, 0]);
-  const textZoom = useTransform(scrollYProgress, [0.28, 0.5], [1, 1.08]);
-  const textTransform = useMotionTemplate`scale(${textZoom})`;
+  // Texto entra e sai conforme a seção cruza o centro da tela.
+  const textOpacity = useTransform(
+    scrollYProgress,
+    [0.15, 0.4, 0.6, 0.85],
+    [0, 1, 1, 0]
+  );
 
   return (
     <section
@@ -62,14 +64,10 @@ export function Showroom() {
           <div className="absolute inset-0 bg-secondary/40" />
         </motion.div>
 
-        {/* Texto sobreposto, some conforme a imagem toma conta */}
+        {/* Texto sobreposto, entra e sai conforme a seção cruza a tela */}
         <motion.div
-          style={
-            reduce
-              ? undefined
-              : { opacity: textOpacity, transform: textTransform }
-          }
-          className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-5 text-center will-change-transform"
+          style={reduce ? undefined : { opacity: textOpacity }}
+          className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-5 text-center"
         >
           <h2 className="text-[clamp(2rem,5vw,3.75rem)] font-bold leading-tight text-white drop-shadow-[0_2px_28px_rgba(0,0,0,0.7)]">
             Entre no showroom

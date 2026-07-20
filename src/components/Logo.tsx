@@ -23,11 +23,13 @@ export function Logo() {
       className="group inline-flex items-center"
     >
       {imgOk ? (
+        // Logo horizontal (recortada do padding preto original via sharp trim,
+        // ver public/logo-cassiano-trim.png — proporção ~4.15:1).
         <Image
-          src="/logo-cassiano.png"
+          src="/logo-cassiano-trim.png"
           alt={loja.nome}
-          width={190}
-          height={52}
+          width={1132}
+          height={273}
           priority
           onError={() => setImgOk(false)}
           className="h-9 w-auto transition-transform duration-300 ease-[var(--ease-brand)] group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
