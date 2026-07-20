@@ -20,6 +20,19 @@ export const loja = {
   mapaEmbed: "",
 } as const;
 
+// Imagens de ambiente (Unsplash, verificadas) — PLACEHOLDER até as fotos
+// reais do showroom/fachada da Cassiano entrarem.
+export const imagens = {
+  hero: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=2000&q=80",
+  showroom: [
+    "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1600&q=80",
+  ],
+  fundador:
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80",
+} as const;
+
 export function whatsappLink(mensagem?: string): string {
   const base = `https://wa.me/${loja.whatsapp}`;
   return mensagem ? `${base}?text=${encodeURIComponent(mensagem)}` : base;

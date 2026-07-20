@@ -58,13 +58,24 @@ body {
 }
 
 /* Tipografia base */
-h1,
-h2,
-h3,
-h4 {
-  color: var(--secondary);
-  text-wrap: balance;
-  letter-spacing: -0.02em;
+/* Headings herdam a cor do contexto por padrão (grafite no claro, branco
+   nas seções escuras via text-white). Em @layer base pra que utilitários
+   do Tailwind (text-white, text-primary) sempre vençam. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--secondary);
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Título do hero: line-height explícito e sem balance. */
+.hero-title {
+  line-height: 1.1;
+  text-wrap: initial;
 }
 
 p {
@@ -104,6 +115,30 @@ p {
   }
 }
 
+/* ============================================================
+   Marquee dos selos de confiança (rolagem contínua da referência)
+   ============================================================ */
+.marquee {
+  overflow: hidden;
+  width: 100%;
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -112,5 +147,12 @@ p {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  /* Marquee para: vira lista estática centrada. */
+  .marquee__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
 }

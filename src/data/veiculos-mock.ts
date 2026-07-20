@@ -3,11 +3,17 @@ import type { Veiculo } from "@/types/veiculo";
 // ─── DADOS PLACEHOLDER ───────────────────────────────────────
 // Estoque de exemplo pra construir e visualizar o site. O usuário
 // substitui pelas fotos e dados reais depois (via Supabase / admin).
-// As fotos usam placeholders; trocar por URLs reais no estoque final.
+//
+// Fotos: Unsplash (URLs verificadas — resolvem HTTP 200). São
+// PLACEHOLDER; trocar pelas fotos reais do estoque da loja depois.
 //
 // Fonte de dados única do site enquanto o Supabase não está plugado.
 // Quando as chaves entrarem, src/lib/veiculos.ts troca esta fonte
 // por queries ao banco — as telas não mudam.
+
+// Helper: monta URL do Unsplash no tamanho pedido.
+const u = (id: string, w = 1200) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 
 export const veiculosMock: Veiculo[] = [
   {
@@ -28,7 +34,14 @@ export const veiculosMock: Veiculo[] = [
     motor: "1.2",
     descricao:
       "Chevrolet Tracker, 2022, usado, 60.000 km. Equipado com motor 1.2 Turbo e transmissão automática, na cor preta. Ideal para quem busca um SUV versátil, com capacidade para 5 passageiros e diversas funcionalidades, como ar-condicionado, câmera de ré e sistema de som com Bluetooth.",
-    fotos: ["/placeholder/veiculo-1.svg"],
+    fotos: [
+      u("photo-1568605117036-5fe5e7bab0b7"),
+      u("photo-1503376780353-7e6692767b70"),
+      u("photo-1494976388531-d1058494cdd8"),
+      u("photo-1552519507-da3b142c6e3d"),
+      u("photo-1583121274602-3e2820c69888"),
+      u("photo-1502877338535-766e1452684a"),
+    ],
     equipamentos: [
       "Câmera traseira",
       "Sensor de estacionamento",
@@ -70,7 +83,7 @@ export const veiculosMock: Veiculo[] = [
     portas: 5,
     carroceria: "SUV",
     descricao: "Range Rover Evoque Pure, procedência verificada e documentação em dia.",
-    fotos: ["/placeholder/veiculo-2.svg"],
+    fotos: [u("photo-1519641471654-76ce0107ad1b")],
     equipamentos: ["Bancos em couro", "Teto solar", "Ar-condicionado digital"],
     fichaTecnica: { "Tipo de carroceria": "SUV" },
     status: "disponivel",
@@ -91,7 +104,7 @@ export const veiculosMock: Veiculo[] = [
     portas: 5,
     carroceria: "Hatch",
     descricao: "Hyundai HB20 econômico, ideal para o dia a dia.",
-    fotos: ["/placeholder/veiculo-3.svg"],
+    fotos: [u("photo-1542362567-b07e54358753")],
     equipamentos: ["Ar-condicionado", "Direção hidráulica", "Vidros elétricos"],
     fichaTecnica: { "Tipo de carroceria": "Hatch" },
     status: "disponivel",
@@ -112,7 +125,7 @@ export const veiculosMock: Veiculo[] = [
     portas: 5,
     carroceria: "SUV",
     descricao: "Chevrolet Equinox Premier com tração integral e baixa quilometragem.",
-    fotos: ["/placeholder/veiculo-4.svg"],
+    fotos: [u("photo-1580273916550-e323be2ae537")],
     equipamentos: ["Tração AWD", "Bancos em couro", "Teto solar", "Piloto automático"],
     fichaTecnica: { "Tipo de carroceria": "SUV", "Controle de tração": "AWD" },
     status: "disponivel",
@@ -133,7 +146,7 @@ export const veiculosMock: Veiculo[] = [
     portas: 5,
     carroceria: "SUV",
     descricao: "Jeep Renegade Longitude, robusto e completo.",
-    fotos: ["/placeholder/veiculo-5.svg"],
+    fotos: [u("photo-1533473359331-0135ef1b58bf")],
     equipamentos: ["Ar-condicionado", "Central multimídia", "Sensor de estacionamento"],
     fichaTecnica: { "Tipo de carroceria": "SUV" },
     status: "disponivel",
@@ -154,7 +167,7 @@ export const veiculosMock: Veiculo[] = [
     portas: 5,
     carroceria: "SUV",
     descricao: "BMW X1 M Sport, premium e com baixa quilometragem.",
-    fotos: ["/placeholder/veiculo-6.svg"],
+    fotos: [u("photo-1580273916550-e323be2ae537")],
     equipamentos: ["Pacote M Sport", "Bancos em couro", "Teto solar panorâmico"],
     fichaTecnica: { "Tipo de carroceria": "SUV" },
     status: "disponivel",
@@ -175,7 +188,7 @@ export const veiculosMock: Veiculo[] = [
     portas: 4,
     carroceria: "Sedã",
     descricao: "Mitsubishi Lancer esportivo e confortável.",
-    fotos: ["/placeholder/veiculo-7.svg"],
+    fotos: [u("photo-1502877338535-766e1452684a")],
     equipamentos: ["Ar-condicionado digital", "Bancos em couro", "Rodas de liga"],
     fichaTecnica: { "Tipo de carroceria": "Sedã" },
     status: "disponivel",
@@ -196,7 +209,7 @@ export const veiculosMock: Veiculo[] = [
     portas: 5,
     carroceria: "Hatch",
     descricao: "Volkswagen CrossFox versátil e econômico.",
-    fotos: ["/placeholder/veiculo-8.svg"],
+    fotos: [u("photo-1494976388531-d1058494cdd8")],
     equipamentos: ["Ar-condicionado", "Direção elétrica", "Central multimídia"],
     fichaTecnica: { "Tipo de carroceria": "Hatch" },
     status: "disponivel",
