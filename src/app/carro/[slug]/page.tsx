@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   FileCheck,
   ChevronRight,
+  Check,
 } from "lucide-react";
 import { SiteChrome } from "@/components/SiteChrome";
 import { VeiculoCard } from "@/components/VeiculoCard";
@@ -184,7 +185,7 @@ export default async function CarroPage({ params }: Props) {
                     key={eq}
                     className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm text-secondary"
                   >
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    <Check size={14} className="text-primary" strokeWidth={2.5} />
                     {eq}
                   </li>
                 ))}

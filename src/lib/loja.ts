@@ -11,7 +11,7 @@ export const loja = {
   whatsappLabel: "(00) 00000-0000",
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://instagram.com/",
   instagramHandle: "@cassianoveiculos",
-  endereco: "Endereço da loja — a definir",
+  endereco: "Endereço: a definir com a loja",
   horario: {
     semana: "Segunda a Sexta, 9h às 18h",
     sabado: "Sábado, 9h às 13h",

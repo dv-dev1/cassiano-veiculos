@@ -36,7 +36,7 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-30 transition-[background-color,backdrop-filter,box-shadow,padding] duration-[400ms] ease-[var(--ease-brand)] ${
+      className={`fixed inset-x-0 top-0 z-30 transition-[background-color,box-shadow] duration-[400ms] ease-[var(--ease-brand)] ${
         scrolled
           ? "bg-secondary/95 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.15)] backdrop-blur-md"
           : "bg-transparent py-5"

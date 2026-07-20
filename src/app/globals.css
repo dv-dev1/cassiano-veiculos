@@ -50,6 +50,18 @@
   border-color: var(--line);
 }
 
+/* Gate de hover positivo: em dispositivos de toque (sem ponteiro fino),
+   neutraliza os efeitos de hover que dependem de movimento, pra o tap não
+   disparar falso-hover "grudado". Complementa o motion-reduce dos componentes. */
+@media (hover: none), (pointer: coarse) {
+  a:hover,
+  button:hover,
+  .group:hover * {
+    translate: none !important;
+    scale: none !important;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--text);
@@ -140,13 +152,22 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* "Gentler, not zero": derruba o MOVIMENTO, mantém crossfade de
+     opacidade/cor. Zera animações em loop e transforms; preserva
+     transições de opacity/color pra a mudança de estado continuar legível. */
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    transition-property: opacity, background-color, color, border-color !important;
+    transition-duration: 0.2s !important;
+  }
+  /* Reveal: crossfade curto de opacidade, sem translate. */
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
   /* Marquee para: vira lista estática centrada. */
   .marquee__track {
