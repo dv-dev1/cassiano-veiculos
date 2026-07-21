@@ -44,26 +44,17 @@ export function Hero() {
         }}
       />
 
-      {/* Cassiano recortado — coluna direita no desktop; presença de fundo no mobile.
-          A base da foto (braço) vem cortada na origem; um fade suave no rodapé
-          faz o corte "dissolver" na seção em vez de parecer amputado. */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 flex w-[78%] items-end justify-end sm:w-[62%] lg:w-[46%]">
-        <div
-          className="relative h-[84%] w-full sm:h-[90%] lg:h-[94%]"
-          style={{
-            maskImage:
-              "linear-gradient(to bottom, #000 82%, transparent 98%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, #000 82%, transparent 98%)",
-          }}
-        >
+      {/* Cassiano recortado (foto nova em alta, braço completo) — coluna direita
+          no desktop; presença de fundo mais sutil no mobile pra não empurrar o CTA. */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 flex w-[78%] items-end justify-end sm:w-[60%] lg:w-[44%]">
+        <div className="relative h-[86%] w-full sm:h-[92%] lg:h-[97%]">
           <Image
             src={imagens.cassiano}
             alt="Cassiano, fundador da Cassiano Veículos"
             fill
             priority
             quality={90}
-            sizes="(max-width: 1024px) 62vw, 46vw"
+            sizes="(max-width: 1024px) 60vw, 44vw"
             className="object-contain object-bottom opacity-40 sm:opacity-65 lg:opacity-100"
           />
         </div>
