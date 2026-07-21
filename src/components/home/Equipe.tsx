@@ -27,6 +27,7 @@ export function Equipe() {
               src={imagens.equipe}
               alt="Equipe de vendas da Cassiano Veículos na loja"
               fill
+              quality={90}
               sizes="(max-width: 1024px) 92vw, 600px"
               className="object-cover"
             />

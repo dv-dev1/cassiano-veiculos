@@ -25,8 +25,14 @@ export const loja = {
 
 // Imagens de ambiente (fotos reais da loja, enviadas pela Cassiano).
 export const imagens = {
-  // Hero — foto real da concessionária (carros na cobertura, luz do dia).
+  // Hero — foto real da concessionária (carros na cobertura), usada como
+  // ambiente ao fundo (escurecida/desfocada) atrás do Cassiano.
   hero: "/concessionaria.jpg",
+  // Foto recortada (fundo transparente) do Cassiano, o dono e cara da marca.
+  // Destaque do hero: a maioria dos clientes compra pela confiança nele.
+  // Versão HD: upscale 2.2x + sharpen (o original é 389x641, pequeno demais
+  // pra renderizar grande sem borrar).
+  cassiano: "/cassiano-hd.png",
   // Foto real da equipe de vendas da Cassiano (usada na seção "Nossa equipe").
   equipe: "/equipe.jpg",
 } as const;

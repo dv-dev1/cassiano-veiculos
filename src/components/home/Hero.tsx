@@ -5,26 +5,73 @@ import { loja, whatsappLink, imagens } from "@/lib/loja";
 import { WhatsappIcon } from "@/components/WhatsappIcon";
 import { Reveal } from "@/components/Reveal";
 
+/**
+ * Hero com o Cassiano — o dono é a cara da marca, e a maioria dos clientes
+ * compra pela confiança nele. Composição: ambiente real da loja (concessionária)
+ * escurecido e desfocado ao fundo, texto e CTAs à esquerda, Cassiano recortado
+ * (PNG transparente) grande à direita, com glow caramelo atrás pra a figura
+ * (de polo escuro) descolar do fundo grafite.
+ *
+ * Mobile: o texto e os CTAs mandam (ficam acima da dobra). O Cassiano vira uma
+ * presença atrás, com opacidade menor, pra não empurrar a ação pra baixo.
+ */
 export function Hero() {
   return (
-    <section className="relative flex min-h-[92vh] items-center overflow-hidden">
-      {/* Foto real da concessionária Cassiano (carros na cobertura). */}
+    <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-secondary">
+      {/* Ambiente: concessionária ao fundo, escurecida (sem blur — a foto tem
+          resolução boa; o overlay grafite já garante a legibilidade do texto). */}
       <Image
         src={imagens.hero}
-        alt="Pátio coberto da Cassiano Veículos com o estoque de seminovos"
+        alt=""
+        aria-hidden="true"
         fill
         priority
+        quality={90}
         sizes="100vw"
-        className="object-cover object-center"
+        className="object-cover object-center opacity-55"
       />
-      {/* Overlay grafite pra legibilidade do texto branco + peso premium.
-          Foto é diurna e clara, então o lado esquerdo (onde vive o texto)
-          precisa de mais grafite; o direito fica leve pra mostrar a loja real. */}
-      <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/88 to-secondary/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-secondary/85 via-transparent to-secondary/45" />
+      {/* Overlays grafite: forte à esquerda (texto), profundidade em cima/baixo. */}
+      <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary/55" />
+      <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/60" />
 
+      {/* Glow caramelo atrás do Cassiano (lado direito), assinatura da marca. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(48% 58% at 78% 58%, rgba(181,110,53,0.38), transparent 72%)",
+        }}
+      />
+
+      {/* Cassiano recortado — coluna direita no desktop; presença de fundo no mobile.
+          A base da foto (braço) vem cortada na origem; um fade suave no rodapé
+          faz o corte "dissolver" na seção em vez de parecer amputado. */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 flex w-[78%] items-end justify-end sm:w-[62%] lg:w-[46%]">
+        <div
+          className="relative h-[84%] w-full sm:h-[90%] lg:h-[94%]"
+          style={{
+            maskImage:
+              "linear-gradient(to bottom, #000 82%, transparent 98%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, #000 82%, transparent 98%)",
+          }}
+        >
+          <Image
+            src={imagens.cassiano}
+            alt="Cassiano, fundador da Cassiano Veículos"
+            fill
+            priority
+            quality={90}
+            sizes="(max-width: 1024px) 62vw, 46vw"
+            className="object-contain object-bottom opacity-40 sm:opacity-65 lg:opacity-100"
+          />
+        </div>
+      </div>
+
+      {/* Conteúdo */}
       <div className="relative mx-auto w-full max-w-[1280px] px-5 pt-28 sm:px-8">
-        <div className="max-w-2xl">
+        <div className="max-w-xl">
           <Reveal
             as="p"
             className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-primary"
@@ -66,6 +113,15 @@ export function Hero() {
               <WhatsappIcon size={18} />
               WhatsApp
             </a>
+          </Reveal>
+
+          {/* Assinatura do Cassiano — reforça que o dono é a cara da marca. */}
+          <Reveal delay={0.32} className="mt-10 flex items-center gap-3">
+            <span className="h-9 w-1 rounded bg-primary" />
+            <div>
+              <p className="text-sm font-semibold text-white">Cassiano</p>
+              <p className="text-xs text-white/55">Fundador da {loja.nome}</p>
+            </div>
           </Reveal>
         </div>
       </div>

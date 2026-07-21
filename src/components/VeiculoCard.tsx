@@ -20,6 +20,7 @@ export function VeiculoCard({ veiculo }: { veiculo: Veiculo }) {
           src={capa}
           alt={`${veiculo.titulo}, ${veiculo.ano}`}
           fill
+          quality={90}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover transition-transform duration-700 ease-[var(--ease-brand)] group-hover:scale-105 motion-reduce:group-hover:scale-100"
         />

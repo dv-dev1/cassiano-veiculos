@@ -21,6 +21,7 @@ export function Galeria({ fotos, titulo }: { fotos: string[]; titulo: string }) 
           alt={`${titulo} — foto ${ativa + 1} de ${total}`}
           fill
           priority
+          quality={90}
           sizes="(max-width: 1024px) 100vw, 60vw"
           className="object-cover"
         />
