@@ -6,6 +6,13 @@ import type { Veiculo } from "@/types/veiculo";
 // Fonte de dados única do site enquanto o Supabase não está plugado.
 // Quando as chaves entrarem, src/lib/veiculos.ts troca esta fonte
 // por queries ao banco — as telas não mudam.
+//
+// ⚠️ QUALIDADE DAS FOTOS (padrão nativo do site):
+// NUNCA copie fotos direto pra public/veiculos/. Sempre passe pelo otimizador,
+// que garante alta resolução + nitidez (senão a foto borra quando exibida grande):
+//   node scripts/otimizar-imagens.mjs --carro <slug> --fonte "<pasta com as fotos>"
+// Ele gera foto-01.webp, foto-02.webp... em 2400px. Use os ORIGINAIS da câmera,
+// nunca versões baixadas do Instagram (essas vêm em 1080px e borram).
 
 // Helper: monta caminho de foto de um veículo em public/veiculos/<slug>/.
 const foto = (slug: string, arquivo: string) => `/veiculos/${slug}/${arquivo}`;

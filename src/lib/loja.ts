@@ -26,14 +26,15 @@ export const loja = {
 // Imagens de ambiente (fotos reais da loja, enviadas pela Cassiano).
 export const imagens = {
   // Hero — foto real da concessionária (carros na cobertura), usada como
-  // ambiente ao fundo (escurecida/desfocada) atrás do Cassiano.
-  hero: "/concessionaria.jpg",
+  // ambiente ao fundo atrás do Cassiano. Versão HD (upscale + sharpen).
+  hero: "/concessionaria-hd.webp",
   // Foto recortada (fundo transparente) do Cassiano, o dono e cara da marca.
   // Destaque do hero: a maioria dos clientes compra pela confiança nele.
   // Versão nova em alta (1024x1536), braço completo e fundo transparente.
   cassiano: "/cassiano-novo.png",
-  // Foto real da equipe de vendas da Cassiano (usada na seção "Nossa equipe").
-  equipe: "/equipe.jpg",
+  // Foto real da equipe de vendas da Cassiano (seção "Nossa equipe").
+  // Versão HD (upscale + sharpen).
+  equipe: "/equipe-hd.webp",
 } as const;
 
 export function whatsappLink(mensagem?: string): string {
