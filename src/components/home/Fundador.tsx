@@ -13,10 +13,10 @@ export function Fundador() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius)]">
             <Image
               src={imagens.fundador}
-              alt="Fundador da Cassiano Veículos"
+              alt="Cassiano, fundador da Cassiano Veículos"
               fill
               sizes="(max-width: 768px) 80vw, 360px"
-              className="object-cover"
+              className="object-cover object-top"
             />
           </div>
           {/* Detalhe em marrom, referência à identidade */}
