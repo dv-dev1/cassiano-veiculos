@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Indicador de dev do Next (o "N" flutuante) — só existe em desenvolvimento,
+  // nunca em produção. Desligado pra o preview local refletir o produto real e
+  // não sobrepor conteúdo no tablet/mobile.
+  devIndicators: false,
   images: {
     // Qualidade da otimização. O padrão do Next é 75, que re-comprime demais
     // nossas fotos reais (equipe, Cassiano, veículos) e faz o site parecer de

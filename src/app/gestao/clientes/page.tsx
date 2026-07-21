@@ -1,6 +1,11 @@
-import { Users } from "lucide-react";
-import { SecaoPlaceholder } from "@/components/gestao/SecaoPlaceholder";
+import { estoqueGestao } from "@/data/gestao-mock";
+import { ClientesView } from "./ClientesView";
 
 export default function ClientesPage() {
-  return <SecaoPlaceholder titulo="Clientes" icon={Users} />;
+  const veiculos = estoqueGestao.map((v) => ({
+    id: v.id,
+    titulo: v.titulo,
+    preco: v.preco,
+  }));
+  return <ClientesView veiculos={veiculos} />;
 }

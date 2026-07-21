@@ -14,9 +14,26 @@
   --surface: #ffffff; /* Branco */
   --text: #222222; /* Texto de corpo */
   --muted: #7c7c7c; /* Cinza médio */
+  /* Metadado do painel interno lido o dia todo: um passo mais escuro que
+     --muted pra fechar o AA 4.5:1 em texto pequeno. Não é a marca pública
+     (essa continua --muted); é o token de densidade do ferramental. */
+  --muted-strong: #6b6b6b;
   --line: #d8d8d8; /* Cinza claro (bordas) */
   --whatsapp: #25d366;
   --whatsapp-hover: #1eb958;
+
+  /* Status semânticos — SÓ do painel do gestor (ferramental interno).
+     Contidos e premium: nunca entram na cara pública da marca. Verde-fechado
+     pra lucro/OK (não o verde-WhatsApp), âmbar pra alerta, terroso pro perigo. */
+  --success: #2e7d5b; /* verde-fechado — lucro, margem OK, disponível */
+  --success-bg: #eaf3ee;
+  --success-ink: #1f5b41;
+  --warning: #b7791f; /* âmbar — sem margem, atenção */
+  --warning-bg: #fbf1dd;
+  --warning-ink: #8a5a15;
+  --danger: #a8432f; /* terroso contido — remover, perigo (nunca liquidação) */
+  --danger-bg: #f6eae7;
+  --danger-ink: #86331f;
 
   --radius: 12px;
   --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -35,9 +52,20 @@
   --color-surface: var(--surface);
   --color-text: var(--text);
   --color-muted: var(--muted);
+  --color-muted-strong: var(--muted-strong);
   --color-line: var(--line);
   --color-whatsapp: var(--whatsapp);
   --color-whatsapp-hover: var(--whatsapp-hover);
+
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-success-ink: var(--success-ink);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-ink: var(--warning-ink);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-danger-ink: var(--danger-ink);
 
   --font-sans: var(--font-poppins), system-ui, sans-serif;
 

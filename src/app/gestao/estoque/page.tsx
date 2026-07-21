@@ -1,6 +1,6 @@
-import { Car } from "lucide-react";
-import { SecaoPlaceholder } from "@/components/gestao/SecaoPlaceholder";
+import { estoqueGestao } from "@/data/gestao-mock";
+import { EstoqueGestao } from "./EstoqueGestao";
 
 export default function EstoquePage() {
-  return <SecaoPlaceholder titulo="Estoque" icon={Car} />;
+  return <EstoqueGestao veiculos={estoqueGestao} />;
 }

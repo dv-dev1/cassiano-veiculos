@@ -51,7 +51,7 @@ function ConteudoSidebar({
       </div>
 
       <Link
-        href="/gestao/clientes"
+        href="/gestao/clientes?novo=1"
         onClick={onNavegar}
         className="flex items-center justify-center gap-2 rounded-[var(--radius)] bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(181,110,53,0.25)] transition-colors duration-200 hover:bg-primary-hover"
       >
