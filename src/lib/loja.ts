@@ -31,6 +31,9 @@ export const imagens = {
   // showroom". Trocar pela foto real da loja da Cassiano depois.
   showroomHero:
     "https://images.unsplash.com/photo-1564631211140-d918ad9b66d4?auto=format&fit=crop&w=2000&q=85",
+  // Fundo do efeito (some conforme a mídia expande).
+  showroomBg:
+    "https://images.unsplash.com/photo-1692406069831-0bb7ea297645?auto=format&fit=crop&w=2000&q=85",
   showroom: [
     "https://images.unsplash.com/photo-1692406069831-0bb7ea297645?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1600&q=80",

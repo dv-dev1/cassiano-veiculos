@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsappFab } from "@/components/WhatsappFab";
+import { ShowroomIntro } from "@/components/home/ShowroomIntro";
 import { Hero } from "@/components/home/Hero";
 import { SelosBar } from "@/components/home/SelosBar";
 import { Destaques } from "@/components/home/Destaques";
@@ -18,6 +19,10 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* Abertura: efeito de "entrar no showroom" que prende o scroll até
+          expandir. Vem antes de tudo — é pra isso que o componente foi feito. */}
+      <ShowroomIntro />
+
       <Header />
       <main>
         <Hero />
