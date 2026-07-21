@@ -182,11 +182,17 @@ p {
     opacity: 1;
     transform: none;
   }
-  /* Marquee para: vira lista estática centrada. */
+  /* Marquee para: vira lista estática centrada, SEM as cópias duplicadas.
+     A 2ª metade (aria-hidden) só existe pra alimentar o loop; sem scroll,
+     ela vira ruído visual (itens repetidos empilhados). Escondemos ela e
+     deixamos só os selos reais numa linha, com wrap no mobile. */
   .marquee__track {
     animation: none;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+  }
+  .marquee__track > [aria-hidden="true"] {
+    display: none;
   }
 }
