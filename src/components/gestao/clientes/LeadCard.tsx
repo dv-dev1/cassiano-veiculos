@@ -3,6 +3,7 @@
 import { Car, Pencil, MoveRight } from "lucide-react";
 import { WhatsappIcon } from "@/components/WhatsappIcon";
 import { formatPreco } from "@/lib/format";
+import { ddmm } from "@/lib/hoje";
 import { whatsappLinkPara } from "@/lib/loja";
 import {
   ETAPAS,
@@ -41,9 +42,9 @@ export function LeadCard({
   const atrasado = lead.estagio === "ligar-volta" && estaAtrasado(lead.retornarEm);
 
   const datas = [
-    lead.conversaEm && { rotulo: "Conversa", valor: lead.conversaEm, tom: "muted" },
-    lead.visitaEm && { rotulo: "Visita", valor: lead.visitaEm, tom: "primary" },
-    lead.veioEm && { rotulo: "Veio", valor: lead.veioEm, tom: "success" },
+    lead.conversaEm && { rotulo: "Conversa", valor: ddmm(lead.conversaEm), tom: "muted" },
+    lead.visitaEm && { rotulo: "Visita", valor: ddmm(lead.visitaEm), tom: "primary" },
+    lead.veioEm && { rotulo: "Veio", valor: ddmm(lead.veioEm), tom: "success" },
   ].filter(Boolean) as { rotulo: string; valor: string; tom: string }[];
 
   const mensagem = `Olá ${primeiroNome(lead.nome)}, aqui é da Cassiano Veículos 👋`;

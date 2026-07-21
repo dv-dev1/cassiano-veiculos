@@ -45,7 +45,8 @@ export interface Lead {
   origem?: string; // "Entrou no site da loja", "Lead Mercado Livre"…
   nota?: string;
   estagio: EstagioFunil;
-  // Relacionamento (rótulos curtos dd/mm, como na referência)
+  // Relacionamento — datas ISO (YYYY-MM-DD). O card formata pra dd/mm; a
+  // agenda usa a data cheia. Fonte única pros dois.
   conversaEm?: string;
   visitaEm?: string;
   veioEm?: string;
@@ -68,8 +69,8 @@ export const leadsMock: Lead[] = [
     carro: "Volkswagen Jetta 2.0 Comfortline Flex 4p",
     origem: "Entrou no site da loja",
     estagio: "lead-novo",
-    conversaEm: "25/06",
-    visitaEm: "27/06",
+    conversaEm: "2026-06-25",
+    visitaEm: "2026-06-27",
   },
   {
     id: "l2",
@@ -79,8 +80,8 @@ export const leadsMock: Lead[] = [
     carro: "GAC GS3 Premium 1.5 Turbo",
     origem: "Chegou pelo Instagram",
     estagio: "visita-marcada",
-    conversaEm: "18/07",
-    visitaEm: "22/07",
+    conversaEm: "2026-07-18",
+    visitaEm: "2026-07-22",
   },
   {
     id: "l3",
@@ -91,7 +92,7 @@ export const leadsMock: Lead[] = [
     nota: "Cliente chegou pelo WhatsApp querendo esse carro.",
     origem: "WhatsApp",
     estagio: "negociando",
-    conversaEm: "16/07",
+    conversaEm: "2026-07-16",
   },
   {
     id: "l4",
@@ -101,7 +102,7 @@ export const leadsMock: Lead[] = [
     carro: "Toyota SW4 Diamond",
     origem: "Pediu pra retornar segunda",
     estagio: "ligar-volta",
-    conversaEm: "14/07",
+    conversaEm: "2026-07-14",
     retornarEm: "2026-07-18",
   },
   {
@@ -114,8 +115,8 @@ export const leadsMock: Lead[] = [
     estagio: "vendeu",
     valorVenda: 47890,
     formaPagamento: "Financiamento bancário",
-    visitaEm: "20/06",
-    veioEm: "20/06",
+    visitaEm: "2026-06-20",
+    veioEm: "2026-06-20",
     fechadoEm: "2026-07-05",
   },
   {
@@ -128,9 +129,9 @@ export const leadsMock: Lead[] = [
     estagio: "vendeu",
     valorVenda: 145000,
     formaPagamento: "Troca + diferença",
-    conversaEm: "13/06",
-    visitaEm: "20/06",
-    veioEm: "20/06",
+    conversaEm: "2026-06-13",
+    visitaEm: "2026-06-20",
+    veioEm: "2026-06-20",
     fechadoEm: "2026-07-12",
   },
   {
@@ -142,7 +143,7 @@ export const leadsMock: Lead[] = [
     origem: "Achou o valor acima do orçamento",
     estagio: "nao-comprou",
     motivoPerda: "Foi de outro modelo",
-    conversaEm: "02/07",
+    conversaEm: "2026-07-02",
     fechadoEm: "2026-07-08",
   },
 ];

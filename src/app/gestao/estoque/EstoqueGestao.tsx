@@ -13,7 +13,6 @@ import {
   LayoutGrid,
   List as ListIcon,
   ChevronRight,
-  X,
 } from "lucide-react";
 import { formatPreco } from "@/lib/format";
 import { resumoEstoque, type VeiculoGestao } from "@/data/gestao-mock";
@@ -45,7 +44,6 @@ export function EstoqueGestao({ veiculos }: { veiculos: VeiculoGestao[] }) {
   const [filtro, setFiltro] = useState<Filtro>("todos");
   const [ordem, setOrdem] = useState<Ordem>("relevancia");
   const [modo, setModo] = useState<Modo>("grade");
-  const [aviso, setAviso] = useState<string | null>(null);
 
   const resumo = useMemo(() => resumoEstoque(veiculos), [veiculos]);
 
@@ -94,15 +92,6 @@ export function EstoqueGestao({ veiculos }: { veiculos: VeiculoGestao[] }) {
     { valor: "preparacao", label: "Em preparação", n: contagem.preparacao },
   ];
 
-  function emBreve(o: string) {
-    setAviso(`${o} entra na próxima fase (com o Supabase plugado).`);
-    window.clearTimeout((emBreve as unknown as { t?: number }).t);
-    (emBreve as unknown as { t?: number }).t = window.setTimeout(
-      () => setAviso(null),
-      3200,
-    );
-  }
-
   return (
     <div>
       {/* Cabeçalho */}
@@ -122,14 +111,13 @@ export function EstoqueGestao({ veiculos }: { veiculos: VeiculoGestao[] }) {
             <FileDown size={17} strokeWidth={1.9} />
             Exportar PDF
           </button>
-          <button
-            type="button"
-            onClick={() => emBreve("Cadastro de veículo")}
+          <Link
+            href="/gestao/estoque/novo"
             className="inline-flex items-center gap-2 rounded-[var(--radius)] bg-primary px-3.5 py-2 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(181,110,53,0.25)] transition-colors duration-200 hover:bg-primary-hover"
           >
             <Plus size={17} strokeWidth={2.25} />
             Adicionar carro
-          </button>
+          </Link>
         </div>
       </header>
 
@@ -367,24 +355,6 @@ export function EstoqueGestao({ veiculos }: { veiculos: VeiculoGestao[] }) {
             </li>
           ))}
         </ul>
-      )}
-
-      {/* Toast — ações de próxima fase */}
-      {aviso && (
-        <div
-          role="status"
-          className="fixed bottom-5 left-1/2 z-[70] flex max-w-[92vw] -translate-x-1/2 items-center gap-3 rounded-[var(--radius)] bg-secondary px-4 py-3 text-sm text-white shadow-[var(--shadow-hover)]"
-        >
-          <span>{aviso}</span>
-          <button
-            type="button"
-            onClick={() => setAviso(null)}
-            aria-label="Fechar aviso"
-            className="text-white/70 hover:text-white"
-          >
-            <X size={16} />
-          </button>
-        </div>
       )}
     </div>
   );

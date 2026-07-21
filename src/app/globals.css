@@ -128,11 +128,12 @@ p {
   color: #fff;
 }
 
-/* Foco visível consistente */
+/* Foco visível consistente. Sem `border-radius` aqui: o outline moderno já
+   acompanha o raio do próprio elemento, e forçar um valor fixo "quadra" o canto
+   de campos/botões arredondados no foco (bug de craft que aparecia nos inputs). */
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
 /* ============================================================

@@ -1,6 +1,6 @@
-import { Calendar } from "lucide-react";
-import { SecaoPlaceholder } from "@/components/gestao/SecaoPlaceholder";
+import { leadsMock } from "@/data/clientes-mock";
+import { AgendaView } from "./AgendaView";
 
 export default function AgendaPage() {
-  return <SecaoPlaceholder titulo="Agenda" icon={Calendar} />;
+  return <AgendaView leads={leadsMock} />;
 }

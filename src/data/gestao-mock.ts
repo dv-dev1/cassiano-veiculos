@@ -100,3 +100,38 @@ export function resumoEstoque(itens: VeiculoGestao[]) {
     parados: noPatio.filter((i) => i.diasEstoque > DIAS_PARADO && i.statusGestao !== "vendido").length,
   };
 }
+
+// Limiares de atenção no giro (dias no pátio). Acima de PARADO é perigo;
+// entre ATENCAO e PARADO é âmbar; abaixo, tranquilo.
+export const GIRO_ATENCAO = 60;
+export const GIRO_PARADO = DIAS_PARADO; // 90
+
+/** Foto do dinheiro no pátio: quanto está investido, quanto vale, lucro esperado. */
+export function resumoLoja(itens: VeiculoGestao[]) {
+  const noPatio = itens.filter((i) => i.statusGestao !== "vendido");
+  return {
+    total: noPatio.length,
+    /** Custo de aquisição somado — o capital imobilizado no estoque. */
+    investido: noPatio.reduce((s, i) => s + i.custo, 0),
+    /** Preço de tabela somado — o que o pátio vale à venda. */
+    valeNaVenda: noPatio.reduce((s, i) => s + i.preco, 0),
+    /** Lucro somado no mínimo à vista — o que sobra se vender tudo na margem atual. */
+    lucroEsperado: noPatio.reduce((s, i) => s + i.lucro, 0),
+    semMargem: noPatio.filter((i) => i.statusGestao === "sem-margem").length,
+  };
+}
+
+/** Nível de atenção de um veículo pelo tempo de pátio. */
+export function nivelGiro(dias: number): "ok" | "atencao" | "parado" {
+  if (dias > GIRO_PARADO) return "parado";
+  if (dias >= GIRO_ATENCAO) return "atencao";
+  return "ok";
+}
+
+/** Os `n` veículos há mais tempo no pátio (giro travado primeiro). */
+export function giroEstoque(itens: VeiculoGestao[], n = 3): VeiculoGestao[] {
+  return itens
+    .filter((i) => i.statusGestao !== "vendido")
+    .sort((a, b) => b.diasEstoque - a.diasEstoque)
+    .slice(0, n);
+}
