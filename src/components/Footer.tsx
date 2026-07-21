@@ -8,7 +8,8 @@ const navFooter = [
   { href: "/", label: "Página Inicial" },
   { href: "/nossos-carros", label: "Nossos carros" },
   { href: "/#diferenciais", label: "Diferenciais" },
-  { href: "/#fundador", label: "O Fundador" },
+  { href: "/#garantia", label: "Garantia 90 dias" },
+  { href: "/#equipe", label: "Nossa equipe" },
   { href: "/#contato", label: "Contato" },
 ];
 

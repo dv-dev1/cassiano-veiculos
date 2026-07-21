@@ -13,13 +13,21 @@ export function Destaques({
 }) {
   return (
     <section className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
-      <Reveal className="mb-10">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-          Estoque atual
+      <Reveal className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          {/* Eyebrow com traço, igual à referência. */}
+          <p className="mb-2 flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            <span className="h-px w-7 bg-primary" />
+            Estoque atual
+          </p>
+          <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold text-secondary">
+            Destaques do estoque
+          </h2>
+        </div>
+        <p className="max-w-sm text-sm leading-relaxed text-muted sm:text-right">
+          Uma seleção do que temos hoje no pátio. Todos com procedência
+          verificada e prontos pra test drive.
         </p>
-        <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold text-secondary">
-          Destaques do estoque
-        </h2>
       </Reveal>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">

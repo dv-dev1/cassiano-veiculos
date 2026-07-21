@@ -56,3 +56,6 @@ next-env.d.ts
 # Vercel
 .vercel
 .claude/scheduled_tasks.lock
+
+# playwright-cli snapshots
+.playwright-cli/

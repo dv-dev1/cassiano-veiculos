@@ -12,7 +12,7 @@ export const loja = {
   instagram: "https://www.instagram.com/cassianoveiculosoficial",
   instagramHandle: "@cassianoveiculosoficial",
   endereco:
-    "Rodovia BR-230, 14162, Loja 10 — Trevo Auto Shop, Cabedelo - PB, CEP 58109-303",
+    "Rodovia BR-230, 14162, Loja 10, Trevo Auto Shop, Cabedelo - PB, CEP 58109-303",
   horario: {
     semana: "Segunda a Sexta, 08h às 18h",
     sabado: "Sábado, 08h às 18h",
@@ -23,12 +23,12 @@ export const loja = {
     "https://www.google.com/maps?q=Trevo+Auto+Shop,+Rodovia+BR-230,+Cabedelo+-+PB,+58109-303&output=embed",
 } as const;
 
-// Imagens de ambiente.
+// Imagens de ambiente (fotos reais da loja, enviadas pela Cassiano).
 export const imagens = {
-  // Hero — carro premium (placeholder Unsplash; trocar por foto da loja se quiser).
-  hero: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=2000&q=80",
-  // Foto real do fundador da Cassiano.
-  fundador: "/fundador.png",
+  // Hero — foto real da concessionária (carros na cobertura, luz do dia).
+  hero: "/concessionaria.jpg",
+  // Foto real da equipe de vendas da Cassiano (usada na seção "Nossa equipe").
+  equipe: "/equipe.jpg",
 } as const;
 
 export function whatsappLink(mensagem?: string): string {

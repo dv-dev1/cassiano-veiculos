@@ -8,19 +8,20 @@ import { Reveal } from "@/components/Reveal";
 export function Hero() {
   return (
     <section className="relative flex min-h-[92vh] items-center overflow-hidden">
-      {/* Foto de fundo */}
+      {/* Foto real da concessionária Cassiano (carros na cobertura). */}
       <Image
         src={imagens.hero}
-        alt="Showroom da Cassiano Veículos com veículos premium"
+        alt="Pátio coberto da Cassiano Veículos com o estoque de seminovos"
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className="object-cover object-center"
       />
-      {/* Overlay grafite pra legibilidade + peso premium.
-          Forte à esquerda (onde vive o texto), leve à direita. */}
-      <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/85 to-secondary/30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/10 to-secondary/20" />
+      {/* Overlay grafite pra legibilidade do texto branco + peso premium.
+          Foto é diurna e clara, então o lado esquerdo (onde vive o texto)
+          precisa de mais grafite; o direito fica leve pra mostrar a loja real. */}
+      <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/88 to-secondary/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-secondary/85 via-transparent to-secondary/45" />
 
       <div className="relative mx-auto w-full max-w-[1280px] px-5 pt-28 sm:px-8">
         <div className="max-w-2xl">

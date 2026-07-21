@@ -6,15 +6,24 @@ import { useState } from "react";
 import { loja } from "@/lib/loja";
 
 /**
- * Logo oficial da Cassiano Veículos (versão fundo escuro: monograma CV
- * caramelo + wordmark claro). Arquivo em public/logo-cassiano.png.
+ * Logo oficial da Cassiano Veículos (marca horizontal: monograma CV caramelo
+ * + wordmark "CASSIANO VEÍCULOS"). Arquivo fonte transparente enviado pela loja
+ * (public/logo-cv-trim.png, recortado do padding via sharp — proporção ~4.15:1).
  *
- * Fallback: se o PNG ainda não existir, mostra um wordmark tipográfico
- * no estilo da marca — o site nunca quebra. Assim que o arquivo for salvo,
- * a logo real aparece.
+ * Duas variantes por contraste de fundo:
+ *  - "light"  → texto claro (public/logo-cv-light.png): usar sobre fundo ESCURO
+ *               (header no topo transparente / grafite ao rolar).
+ *  - "dark"   → texto grafite original (public/logo-cv-trim.png): usar sobre
+ *               fundo CLARO (footer areia).
+ *
+ * Fallback: se o PNG não carregar, mostra um wordmark tipográfico no estilo da
+ * marca — o site nunca quebra.
  */
-export function Logo() {
+export function Logo({ variant = "light" }: { variant?: "light" | "dark" }) {
   const [imgOk, setImgOk] = useState(true);
+  const src = variant === "light" ? "/logo-cv-light.png" : "/logo-cv-trim.png";
+  // Cor do wordmark tipográfico do fallback, casando com a variante.
+  const wordmarkClass = variant === "light" ? "text-white" : "text-secondary";
 
   return (
     <Link
@@ -23,16 +32,14 @@ export function Logo() {
       className="group inline-flex items-center"
     >
       {imgOk ? (
-        // Logo horizontal (recortada do padding preto original via sharp trim,
-        // ver public/logo-cassiano-trim.png — proporção ~4.15:1).
         <Image
-          src="/logo-cassiano-trim.png"
+          src={src}
           alt={loja.nome}
-          width={1132}
-          height={273}
+          width={453}
+          height={109}
           priority
           onError={() => setImgOk(false)}
-          className="h-9 w-auto transition-transform duration-300 ease-[var(--ease-brand)] group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
+          className="h-8 w-auto transition-transform duration-300 ease-[var(--ease-brand)] group-hover:scale-[1.03] motion-reduce:group-hover:scale-100 sm:h-9"
         />
       ) : (
         <span className="inline-flex items-center gap-2.5">
@@ -43,7 +50,9 @@ export function Logo() {
           >
             CV
           </span>
-          <span className="text-[15px] font-semibold uppercase leading-none tracking-[0.12em] text-white">
+          <span
+            className={`text-[15px] font-semibold uppercase leading-none tracking-[0.12em] ${wordmarkClass}`}
+          >
             Cassiano
             <span className="text-primary"> Veículos</span>
           </span>

@@ -23,19 +23,23 @@ export function VeiculoCard({ veiculo }: { veiculo: Veiculo }) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover transition-transform duration-700 ease-[var(--ease-brand)] group-hover:scale-105 motion-reduce:group-hover:scale-100"
         />
+        {/* Véu grafite que sobe suave no hover, dando profundidade sem esconder o carro. */}
+        <div className="absolute inset-0 bg-gradient-to-t from-secondary/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 ease-[var(--ease-brand)] group-hover:opacity-100 motion-reduce:transition-none" />
         <span className="absolute left-3 top-3 rounded-md bg-secondary/80 px-2 py-1 text-xs font-medium text-white backdrop-blur-sm">
           {veiculo.ano}
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-4">
-        <h3 className="text-[15px] font-semibold leading-snug text-secondary">
+      <div className="flex flex-1 flex-col p-4">
+        <h3 className="min-h-[2.6em] text-[15px] font-semibold leading-snug text-secondary">
           {veiculo.titulo}
         </h3>
-        <p className="text-xs text-muted">
+        <p className="mt-2 text-xs text-muted">
           {veiculo.ano} · {formatKm(veiculo.km)}
         </p>
-        <div className="mt-auto flex items-center justify-between pt-2">
+        {/* Divisor fino, igual à referência (separa specs do preço). */}
+        <div className="mt-3 border-t border-line pt-3" />
+        <div className="mt-auto flex items-end justify-between">
           <span className="text-lg font-bold text-secondary">
             {formatPreco(veiculo.preco)}
           </span>
