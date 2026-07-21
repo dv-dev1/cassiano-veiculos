@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { loja, whatsappLink, imagens } from "@/lib/loja";
+import { loja, imagens } from "@/lib/loja";
 import { WhatsappIcon } from "@/components/WhatsappIcon";
+import { WhatsappTrigger } from "@/components/whatsapp/WhatsappTrigger";
 import { Reveal } from "@/components/Reveal";
 
 /**
@@ -95,15 +96,13 @@ export function Hero() {
               Ver veículos
               <ChevronRight size={18} />
             </Link>
-            <a
-              href={whatsappLink(`Olá! Vim pelo site da ${loja.nome} e quero atendimento.`)}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsappTrigger
+              mensagem={`Olá! Vim pelo site da ${loja.nome} e quero atendimento.`}
               className="inline-flex items-center gap-2 rounded-[var(--radius)] border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-[transform,background-color] duration-300 ease-[var(--ease-brand)] hover:-translate-y-0.5 hover:bg-white/10 motion-reduce:hover:translate-y-0"
             >
               <WhatsappIcon size={18} />
               WhatsApp
-            </a>
+            </WhatsappTrigger>
           </Reveal>
 
           {/* Assinatura do Cassiano — reforça que o dono é a cara da marca. */}

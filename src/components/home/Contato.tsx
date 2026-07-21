@@ -1,6 +1,7 @@
 import { MapPin, Phone, Clock } from "lucide-react";
-import { loja, whatsappLink } from "@/lib/loja";
+import { loja } from "@/lib/loja";
 import { WhatsappIcon } from "@/components/WhatsappIcon";
+import { WhatsappTrigger } from "@/components/whatsapp/WhatsappTrigger";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { Reveal } from "@/components/Reveal";
 
@@ -33,15 +34,13 @@ export function Contato() {
               </Reveal>
 
               <Reveal delay={0.14} className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href={whatsappLink(`Olá! Vim pelo site da ${loja.nome}.`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <WhatsappTrigger
+                  mensagem={`Olá! Vim pelo site da ${loja.nome}.`}
                   className="inline-flex items-center gap-2 rounded-[var(--radius)] bg-whatsapp px-6 py-3.5 text-sm font-semibold text-white transition-[transform,background-color,box-shadow] duration-300 ease-[var(--ease-brand)] hover:-translate-y-0.5 hover:bg-whatsapp-hover hover:shadow-[0_10px_28px_rgba(37,211,102,0.4)] motion-reduce:hover:translate-y-0"
                 >
                   <WhatsappIcon size={18} />
                   Falar no WhatsApp
-                </a>
+                </WhatsappTrigger>
                 <a
                   href={loja.instagram}
                   target="_blank"

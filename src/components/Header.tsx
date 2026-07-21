@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { WhatsappIcon } from "./WhatsappIcon";
-import { loja, whatsappLink } from "@/lib/loja";
+import { WhatsappTrigger } from "./whatsapp/WhatsappTrigger";
+import { loja } from "@/lib/loja";
 
 const navLinks = [
   { href: "/", label: "Página Inicial" },
@@ -59,15 +60,13 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a
-            href={whatsappLink(`Olá! Vim pelo site da ${loja.nome}.`)}
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsappTrigger
+            mensagem={`Olá! Vim pelo site da ${loja.nome}.`}
             className="hidden items-center gap-2 rounded-[var(--radius)] bg-whatsapp px-4 py-2.5 text-sm font-semibold text-white transition-[transform,background-color,box-shadow] duration-300 ease-[var(--ease-brand)] hover:-translate-y-0.5 hover:bg-whatsapp-hover hover:shadow-[0_8px_20px_rgba(37,211,102,0.35)] motion-reduce:hover:translate-y-0 sm:flex"
           >
             <WhatsappIcon size={18} />
             WhatsApp
-          </a>
+          </WhatsappTrigger>
 
           <button
             type="button"

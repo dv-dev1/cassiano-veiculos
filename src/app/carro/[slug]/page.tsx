@@ -17,9 +17,10 @@ import { SiteChrome } from "@/components/SiteChrome";
 import { VeiculoCard } from "@/components/VeiculoCard";
 import { Reveal } from "@/components/Reveal";
 import { WhatsappIcon } from "@/components/WhatsappIcon";
+import { WhatsappTrigger } from "@/components/whatsapp/WhatsappTrigger";
 import { getVeiculoBySlug, getOutrosVeiculos, getVeiculos } from "@/lib/veiculos";
 import { formatKm, formatPreco } from "@/lib/format";
-import { loja, whatsappLink } from "@/lib/loja";
+import { loja } from "@/lib/loja";
 import { Galeria } from "./Galeria";
 
 interface Props {
@@ -129,15 +130,13 @@ export default async function CarroPage({ params }: Props) {
                   })}
                 </div>
 
-                <a
-                  href={whatsappLink(mensagemWpp)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <WhatsappTrigger
+                  mensagem={mensagemWpp}
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-[var(--radius)] bg-whatsapp px-6 py-3.5 text-sm font-semibold text-white transition-[transform,background-color,box-shadow] duration-300 ease-[var(--ease-brand)] hover:-translate-y-0.5 hover:bg-whatsapp-hover hover:shadow-[0_10px_28px_rgba(37,211,102,0.4)] motion-reduce:hover:translate-y-0"
                 >
                   <WhatsappIcon size={18} />
                   Falar com um vendedor
-                </a>
+                </WhatsappTrigger>
 
                 <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted">
                   <span className="inline-flex items-center gap-1.5">

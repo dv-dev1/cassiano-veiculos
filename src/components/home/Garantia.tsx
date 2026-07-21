@@ -1,6 +1,7 @@
 import { BatteryCharging, Disc3, Wrench, ShieldCheck } from "lucide-react";
-import { whatsappLink, loja } from "@/lib/loja";
+import { loja } from "@/lib/loja";
 import { WhatsappIcon } from "@/components/WhatsappIcon";
+import { WhatsappTrigger } from "@/components/whatsapp/WhatsappTrigger";
 import { Reveal } from "@/components/Reveal";
 
 /**
@@ -88,17 +89,13 @@ export function Garantia() {
           </ul>
 
           <Reveal delay={0.32} className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href={whatsappLink(
-                `Olá! Vim pelo site da ${loja.nome} e quero saber mais sobre a garantia de 90 dias.`
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsappTrigger
+              mensagem={`Olá! Vim pelo site da ${loja.nome} e quero saber mais sobre a garantia de 90 dias.`}
               className="inline-flex items-center gap-2 rounded-[var(--radius)] bg-secondary px-6 py-3.5 text-sm font-semibold text-white transition-[transform,box-shadow,background-color] duration-300 ease-[var(--ease-brand)] hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)] motion-reduce:hover:translate-y-0"
             >
               <WhatsappIcon size={18} />
               Perguntar sobre a garantia
-            </a>
+            </WhatsappTrigger>
             <p className="inline-flex items-center gap-2 text-sm font-medium text-white/85">
               <ShieldCheck size={18} strokeWidth={1.75} />
               Escrita, não só de boca.

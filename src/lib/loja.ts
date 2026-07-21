@@ -41,3 +41,28 @@ export function whatsappLink(mensagem?: string): string {
   const base = `https://wa.me/${loja.whatsapp}`;
   return mensagem ? `${base}?text=${encodeURIComponent(mensagem)}` : base;
 }
+
+// ─── ATENDENTES ──────────────────────────────────────────────
+// Equipe de atendimento da loja. Ao clicar em qualquer CTA de WhatsApp, o
+// visitante escolhe com quem falar (ver components/whatsapp). `numero` é o
+// formato do wa.me (55 + DDD + número, só dígitos); `label` é o que aparece.
+export interface Atendente {
+  nome: string;
+  numero: string;
+  label: string;
+  papel?: string; // função na loja (Vendas, Financiamento...) — opcional
+}
+
+export const atendentes: readonly Atendente[] = [
+  { nome: "Afonso", numero: "5583999859924", label: "(83) 99985-9924" },
+  { nome: "Cassiano Veículos", numero: "5583996071247", label: "(83) 99607-1247" },
+  { nome: "Daniel", numero: "5583991861991", label: "(83) 99186-1991" },
+  { nome: "Placa Preta", numero: "5583987722822", label: "(83) 98772-2822" },
+  { nome: "Heleno", numero: "5583991394554", label: "(83) 99139-4554" },
+] as const;
+
+// Link do wa.me pra um atendente específico, com a mensagem pré-pronta do CTA.
+export function whatsappLinkPara(numero: string, mensagem?: string): string {
+  const base = `https://wa.me/${numero}`;
+  return mensagem ? `${base}?text=${encodeURIComponent(mensagem)}` : base;
+}
