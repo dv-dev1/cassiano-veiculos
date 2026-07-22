@@ -49,6 +49,7 @@ export interface Lead {
   // agenda usa a data cheia. Fonte única pros dois.
   conversaEm?: string;
   visitaEm?: string;
+  horaVisita?: string; // HH:MM — horário da visita agendada, se informado
   veioEm?: string;
   // Fechamento (vendeu / não comprou)
   valorVenda?: number;

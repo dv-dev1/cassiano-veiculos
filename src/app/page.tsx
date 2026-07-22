@@ -13,11 +13,11 @@ import { getDestaques, contarVeiculos } from "@/lib/veiculos";
 
 /**
  * Ordem da home pela escada de decisão de compra:
- * Hero (atenção + promessa) → Selos (remove medo) → Fundador (o dono, cara da
- * marca e presença nas redes — confiança logo de cara) → Estoque (o que ele veio
- * ver, o coração da conversão) → Diferenciais (por que aqui) → Garantia 90 dias
- * (remove o maior medo de seminovo) → Equipe (prova de estrutura + voz do dono,
- * confiança) → Contato (a ação: WhatsApp).
+ * Hero (atenção + promessa) → Selos (remove medo) → Estoque (o que ele veio
+ * ver, o coração da conversão) → Fundador (quem está por trás, cara da marca e
+ * presença nas redes — confiança depois de ver o produto) → Diferenciais (por
+ * que aqui) → Garantia 90 dias (remove o maior medo de seminovo) → Equipe (prova
+ * de estrutura + voz do dono, confiança) → Contato (a ação: WhatsApp).
  * Sem showroom decorativo — foco em ver carro e chamar no WhatsApp.
  */
 export default async function HomePage() {
@@ -32,8 +32,8 @@ export default async function HomePage() {
       <main>
         <Hero />
         <SelosBar />
-        <Fundador />
         <Destaques veiculos={destaques} total={total} />
+        <Fundador />
         <Diferenciais />
         <Garantia />
         <Equipe />

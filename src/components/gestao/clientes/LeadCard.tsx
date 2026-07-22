@@ -43,7 +43,11 @@ export function LeadCard({
 
   const datas = [
     lead.conversaEm && { rotulo: "Conversa", valor: ddmm(lead.conversaEm), tom: "muted" },
-    lead.visitaEm && { rotulo: "Visita", valor: ddmm(lead.visitaEm), tom: "primary" },
+    lead.visitaEm && {
+      rotulo: "Visita",
+      valor: ddmm(lead.visitaEm) + (lead.horaVisita ? ` · ${lead.horaVisita}` : ""),
+      tom: "primary",
+    },
     lead.veioEm && { rotulo: "Veio", valor: ddmm(lead.veioEm), tom: "success" },
   ].filter(Boolean) as { rotulo: string; valor: string; tom: string }[];
 
@@ -151,8 +155,10 @@ export function LeadCard({
           Editar
         </button>
 
-        {/* Mover — <select> nativo: acessível, touch, sem clipping */}
-        <div className="relative ml-auto">
+        {/* Mover — <select> nativo: só no toque (celular/tablet), onde o arraste
+            HTML5 não funciona. No mouse (ponteiro fino) o arraste resolve, então
+            escondemos pra não duplicar a ação no card. */}
+        <div className="relative ml-auto [@media(pointer:fine)]:hidden">
           <MoveRight
             size={14}
             className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-muted"

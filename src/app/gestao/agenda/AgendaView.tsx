@@ -17,7 +17,7 @@ import {
   TIPO_EVENTO,
   type TipoEvento,
 } from "@/data/agenda";
-import type { Lead } from "@/data/clientes-mock";
+import { useLeads } from "@/lib/clientes-store";
 import { CalendarioMes } from "@/components/gestao/agenda/CalendarioMes";
 import { AgendaLista, EventoItem } from "@/components/gestao/agenda/AgendaLista";
 
@@ -26,7 +26,8 @@ const [HOJE_ANO, HOJE_MES] = (() => {
   return [a, m - 1] as const;
 })();
 
-export function AgendaView({ leads }: { leads: Lead[] }) {
+export function AgendaView() {
+  const leads = useLeads();
   const [vista, setVista] = useState<"mes" | "agenda">("mes");
   const [ano, setAno] = useState(HOJE_ANO);
   const [mes, setMes] = useState(HOJE_MES);

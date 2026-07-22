@@ -5,23 +5,15 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X, Check } from "lucide-react";
 import { formatPreco } from "@/lib/format";
 import type { VeiculoGestao } from "@/data/gestao-mock";
+import {
+  ESTAGIOS_FORM as ESTAGIOS,
+  type EstagioForm,
+  type NovoClienteDados,
+} from "@/lib/clientes-store";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-const ESTAGIOS = [
-  "Lead novo",
-  "Em contato",
-  "Negociação",
-  "Fechamento",
-] as const;
-
-export interface NovoClienteDados {
-  nome: string;
-  telefone: string;
-  estagio: (typeof ESTAGIOS)[number];
-  veiculoId: string;
-  observacoes: string;
-}
+export type { NovoClienteDados };
 
 export interface NovoClienteModalProps {
   aberto: boolean;
@@ -52,9 +44,13 @@ export function NovoClienteModal({
 
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [estagio, setEstagio] = useState<(typeof ESTAGIOS)[number]>("Lead novo");
+  const [estagio, setEstagio] = useState<EstagioForm>("Lead novo");
   const [veiculoId, setVeiculoId] = useState(veiculoInicialId ?? veiculos[0]?.id ?? "");
   const [obs, setObs] = useState("");
+  const [conversaEm, setConversaEm] = useState("");
+  const [visitaEm, setVisitaEm] = useState("");
+  const [horaVisita, setHoraVisita] = useState("");
+  const [veioEm, setVeioEm] = useState("");
   const [erro, setErro] = useState<string | null>(null);
   const [enviado, setEnviado] = useState(false);
 
@@ -66,6 +62,10 @@ export function NovoClienteModal({
     setEstagio("Lead novo");
     setVeiculoId(veiculoInicialId ?? veiculos[0]?.id ?? "");
     setObs("");
+    setConversaEm("");
+    setVisitaEm("");
+    setHoraVisita("");
+    setVeioEm("");
     setErro(null);
     setEnviado(false);
     const t = setTimeout(() => nomeRef.current?.focus(), 60);
@@ -99,6 +99,10 @@ export function NovoClienteModal({
       estagio,
       veiculoId,
       observacoes: obs.trim(),
+      conversaEm: conversaEm || undefined,
+      visitaEm: visitaEm || undefined,
+      horaVisita: horaVisita || undefined,
+      veioEm: veioEm || undefined,
     });
     setEnviado(true);
   }
@@ -152,11 +156,12 @@ export function NovoClienteModal({
                 </span>
                 <p className="mt-4 text-sm text-secondary">
                   <span className="font-semibold">{nome.trim()}</span> foi
-                  registrado em <span className="font-medium">{estagio}</span>.
+                  registrado e já aparece no funil de{" "}
+                  <span className="font-medium">Clientes</span>.
                 </p>
                 <p className="mt-1.5 max-w-xs text-xs text-muted">
-                  Fase de demonstração — a negociação ainda não é gravada no
-                  banco. Some assim que o Supabase entrar.
+                  Fica salvo neste navegador. Quando o Supabase entrar, passa a
+                  sincronizar entre todos os dispositivos.
                 </p>
                 <button
                   type="button"
@@ -262,19 +267,39 @@ export function NovoClienteModal({
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <label className="flex flex-col gap-1 text-xs text-muted">
                       Conversamos em
-                      <input type="date" className={campoBase} />
+                      <input
+                        type="date"
+                        value={conversaEm}
+                        onChange={(e) => setConversaEm(e.target.value)}
+                        className={campoBase}
+                      />
                     </label>
                     <label className="flex flex-col gap-1 text-xs text-muted">
                       Visita agendada para
-                      <input type="date" className={campoBase} />
+                      <input
+                        type="date"
+                        value={visitaEm}
+                        onChange={(e) => setVisitaEm(e.target.value)}
+                        className={campoBase}
+                      />
                     </label>
                     <label className="flex flex-col gap-1 text-xs text-muted">
                       Horário da visita
-                      <input type="time" className={campoBase} />
+                      <input
+                        type="time"
+                        value={horaVisita}
+                        onChange={(e) => setHoraVisita(e.target.value)}
+                        className={campoBase}
+                      />
                     </label>
                     <label className="flex flex-col gap-1 text-xs text-muted">
                       Veio à loja em
-                      <input type="date" className={campoBase} />
+                      <input
+                        type="date"
+                        value={veioEm}
+                        onChange={(e) => setVeioEm(e.target.value)}
+                        className={campoBase}
+                      />
                     </label>
                   </div>
                 </fieldset>

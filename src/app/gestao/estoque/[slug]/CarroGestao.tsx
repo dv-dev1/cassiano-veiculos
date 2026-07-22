@@ -16,7 +16,11 @@ import {
 } from "lucide-react";
 import { formatPreco } from "@/lib/format";
 import type { VeiculoGestao } from "@/data/gestao-mock";
-import { NovoClienteModal } from "@/components/gestao/NovoClienteModal";
+import {
+  NovoClienteModal,
+  type NovoClienteDados,
+} from "@/components/gestao/NovoClienteModal";
+import { adicionarLead, criarLead } from "@/lib/clientes-store";
 
 export function CarroGestao({
   veiculo,
@@ -66,6 +70,13 @@ export function CarroGestao({
     setDescontoMax(valor);
     setMargemDefinida(true);
     setEditando(false);
+  }
+
+  // Registra o cliente no funil de Clientes (mesmo store do kanban). O modal
+  // vem com este carro pré-selecionado; resolvemos o título pra gravar no lead.
+  function registrarCliente(dados: NovoClienteDados) {
+    const carro = estoque.find((v) => v.id === dados.veiculoId)?.titulo;
+    adicionarLead(criarLead(dados, carro));
   }
 
   const acaoSecundaria =
@@ -304,6 +315,7 @@ export function CarroGestao({
         onFechar={() => setModalAberto(false)}
         veiculos={estoque}
         veiculoInicialId={veiculo.id}
+        onSalvar={registrarCliente}
       />
 
       {/* Toast */}

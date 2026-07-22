@@ -12,12 +12,16 @@ import {
   X,
 } from "lucide-react";
 import { StatCard } from "@/components/gestao/StatCard";
-import {
-  NovoClienteModal,
-  type NovoClienteDados,
-} from "@/components/gestao/NovoClienteModal";
+import { NovoClienteModal } from "@/components/gestao/NovoClienteModal";
 import type { VeiculoGestao } from "@/data/gestao-mock";
-import { leadsMock, type EstagioFunil, type Lead } from "@/data/clientes-mock";
+import type { EstagioFunil } from "@/data/clientes-mock";
+import {
+  useLeads,
+  adicionarLead,
+  moverLead,
+  criarLead,
+  type NovoClienteDados,
+} from "@/lib/clientes-store";
 import { KanbanFunil } from "@/components/gestao/clientes/KanbanFunil";
 import { Compradores } from "@/components/gestao/clientes/Compradores";
 
@@ -37,17 +41,12 @@ function noMes(iso: string | undefined, ano: number, mes: number) {
   return !!iso && iso.startsWith(`${ano}-${String(mes + 1).padStart(2, "0")}`);
 }
 
-function mapaEstagio(rotulo: NovoClienteDados["estagio"]): EstagioFunil {
-  if (rotulo === "Negociação" || rotulo === "Fechamento") return "negociando";
-  return "lead-novo";
-}
-
 export function ClientesView({
   veiculos,
 }: {
   veiculos: Pick<VeiculoGestao, "id" | "titulo" | "preco">[];
 }) {
-  const [leads, setLeads] = useState<Lead[]>(leadsMock);
+  const leads = useLeads();
   const [aba, setAba] = useState<"funil" | "compradores">("funil");
   const [ano, setAno] = useState(2026);
   const [mes, setMes] = useState(6); // 0-idx → Julho (mês corrente do mock)
@@ -97,35 +96,17 @@ export function ClientesView({
   }
 
   function mover(id: string, destino: EstagioFunil) {
-    const fechada = destino === "vendeu" || destino === "nao-comprou";
-    setLeads((atual) =>
-      atual.map((l) =>
-        l.id === id
-          ? { ...l, estagio: destino, fechadoEm: fechada ? (l.fechadoEm ?? HOJE_ISO) : l.fechadoEm }
-          : l,
-      ),
-    );
+    moverLead(id, destino);
     // Ao fechar, salta pro mês corrente pra o card não sumir do board.
-    if (fechada) {
+    if (destino === "vendeu" || destino === "nao-comprou") {
       setAno(2026);
       setMes(6);
     }
   }
 
   function salvarCliente(dados: NovoClienteDados) {
-    const digitos = dados.telefone.replace(/\D/g, "");
     const carro = veiculos.find((v) => v.id === dados.veiculoId)?.titulo;
-    const novo: Lead = {
-      id: `novo-${leads.length + 1}-${digitos.slice(-4) || "0000"}`,
-      nome: dados.nome,
-      telefone: digitos ? (digitos.startsWith("55") ? digitos : `55${digitos}`) : "",
-      telefoneLabel: dados.telefone || "—",
-      carro,
-      origem: "Cadastrado no painel",
-      nota: dados.observacoes || undefined,
-      estagio: mapaEstagio(dados.estagio),
-    };
-    setLeads((atual) => [novo, ...atual]);
+    adicionarLead(criarLead(dados, carro));
     setAba("funil");
   }
 
