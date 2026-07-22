@@ -12,9 +12,19 @@ interface RevealProps {
 }
 
 /**
- * Scroll reveal fiel à referência: o conteúdo é visível por padrão (SSR e
- * reduced-motion), e o efeito só REALÇA a entrada. Nunca esconde conteúdo
- * atrás de estado — se o observer não rodar, o texto continua lá.
+ * Scroll reveal seguro por construção. O conteúdo é VISÍVEL por padrão (SSR,
+ * sem JS, reduced-motion). O efeito só "arma" (esconde pra depois revelar) os
+ * elementos que nascem ABAIXO da dobra — e só depois que o JS confirmou que
+ * está vivo (dentro deste effect). Consequências:
+ *
+ *  - JS morto/lento/hidratação falha  → nada é armado → tudo continua visível.
+ *  - Elemento acima da dobra no load  → nunca é escondido → sem flash.
+ *  - Print headless sem rolar          → o que está na 1ª dobra está visível;
+ *    as seções de baixo só escondem quando o JS as arma, e revelam ao entrarem
+ *    no viewport (o observer dispara na rolagem do próprio screenshot tool).
+ *
+ * Nunca voltar a esconder por padrão via classe: é o que deixava a seção em
+ * branco no celular quando o gatilho não rodava.
  */
 export function Reveal({
   children,
@@ -23,20 +33,25 @@ export function Reveal({
   className = "",
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
+  const [armed, setArmed] = useState(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Sem suporte / reduced-motion: mostra direto.
+    // Sem suporte / reduced-motion: não arma nada. Fica visível, sem movimento.
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (prefersReduced || !("IntersectionObserver" in window)) {
-      setVisible(true);
-      return;
-    }
+    if (prefersReduced || !("IntersectionObserver" in window)) return;
+
+    // Só faz sentido esconder pra revelar o que ainda não está na tela. O que
+    // já está (acima/na dobra) fica visível — nada de flash de entrada.
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (el.getBoundingClientRect().top < vh) return;
+
+    setArmed(true);
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -56,7 +71,9 @@ export function Reveal({
   return (
     <Tag
       ref={ref}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`.trim()}
+      className={`reveal ${armed ? "reveal--armed" : ""} ${
+        visible ? "is-visible" : ""
+      } ${className}`.trim()}
       style={delay ? { ["--reveal-delay" as string]: `${delay}s` } : undefined}
     >
       {children}

@@ -65,7 +65,7 @@ export default async function CarroPage({ params }: Props) {
   const fichaEntries = Object.entries(veiculo.fichaTecnica);
 
   return (
-    <SiteChrome>
+    <SiteChrome solidHeader>
       <div className="bg-background pt-24">
         <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
           {/* Breadcrumb */}

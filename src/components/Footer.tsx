@@ -66,7 +66,7 @@ export function Footer() {
           <div className="mt-4 flex gap-3">
             <WhatsappTrigger
               aria-label="WhatsApp"
-              className="grid h-10 w-10 place-items-center rounded-[var(--radius)] border border-white/15 transition-colors hover:border-primary hover:text-primary"
+              className="grid h-11 w-11 place-items-center rounded-[var(--radius)] border border-white/15 transition-colors hover:border-primary hover:text-primary"
             >
               <WhatsappIcon size={18} />
             </WhatsappTrigger>
@@ -75,7 +75,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="grid h-10 w-10 place-items-center rounded-[var(--radius)] border border-white/15 transition-colors hover:border-primary hover:text-primary"
+              className="grid h-11 w-11 place-items-center rounded-[var(--radius)] border border-white/15 transition-colors hover:border-primary hover:text-primary"
             >
               <InstagramIcon size={18} />
             </a>

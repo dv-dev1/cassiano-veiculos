@@ -18,7 +18,7 @@ import { Reveal } from "@/components/Reveal";
  */
 export function Hero() {
   return (
-    <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-secondary">
+    <section className="relative flex min-h-[92svh] items-center overflow-hidden bg-secondary">
       {/* Ambiente: concessionária ao fundo, escurecida (sem blur — a foto tem
           resolução boa; o overlay grafite já garante a legibilidade do texto). */}
       <Image
@@ -31,35 +31,21 @@ export function Hero() {
         sizes="100vw"
         className="object-cover object-center opacity-55"
       />
-      {/* Overlays grafite: forte à esquerda (texto), profundidade em cima/baixo. */}
-      <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary/55" />
+      {/* Overlays grafite: forte à esquerda (texto), o salão respira à direita
+          agora que o Cassiano saiu (ele ganhou seção própria logo abaixo). */}
+      <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/85 to-secondary/45" />
       <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/60" />
 
-      {/* Glow caramelo atrás do Cassiano (lado direito), assinatura da marca. */}
+      {/* Luz de ambiente caramelo (assinatura da marca) — sutil, não mais um
+          holofote sobre uma figura; só calor no canto do salão. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(48% 58% at 78% 58%, rgba(181,110,53,0.38), transparent 72%)",
+            "radial-gradient(55% 60% at 88% 68%, rgba(181,110,53,0.16), transparent 70%)",
         }}
       />
-
-      {/* Cassiano recortado (foto nova em alta, braço completo) — coluna direita
-          no desktop; presença de fundo mais sutil no mobile pra não empurrar o CTA. */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 flex w-[78%] items-end justify-end sm:w-[60%] lg:w-[44%]">
-        <div className="relative h-[86%] w-full sm:h-[92%] lg:h-[97%]">
-          <Image
-            src={imagens.cassiano}
-            alt="Cassiano, fundador da Cassiano Veículos"
-            fill
-            priority
-            quality={90}
-            sizes="(max-width: 1024px) 60vw, 44vw"
-            className="object-contain object-bottom opacity-40 sm:opacity-65 lg:opacity-100"
-          />
-        </div>
-      </div>
 
       {/* Conteúdo */}
       <div className="relative mx-auto w-full max-w-[1280px] px-5 pt-28 sm:px-8">
@@ -103,15 +89,6 @@ export function Hero() {
               <WhatsappIcon size={18} />
               WhatsApp
             </WhatsappTrigger>
-          </Reveal>
-
-          {/* Assinatura do Cassiano — reforça que o dono é a cara da marca. */}
-          <Reveal delay={0.32} className="mt-10 flex items-center gap-3">
-            <span className="h-9 w-1 rounded bg-primary" />
-            <div>
-              <p className="text-sm font-semibold text-white">Cassiano</p>
-              <p className="text-xs text-white/55">Fundador da {loja.nome}</p>
-            </div>
           </Reveal>
         </div>
       </div>

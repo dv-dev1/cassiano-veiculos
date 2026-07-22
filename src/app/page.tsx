@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { WhatsappFab } from "@/components/WhatsappFab";
 import { Hero } from "@/components/home/Hero";
 import { SelosBar } from "@/components/home/SelosBar";
+import { Fundador } from "@/components/home/Fundador";
 import { Destaques } from "@/components/home/Destaques";
 import { Diferenciais } from "@/components/home/Diferenciais";
 import { Garantia } from "@/components/home/Garantia";
@@ -12,7 +13,8 @@ import { getDestaques, contarVeiculos } from "@/lib/veiculos";
 
 /**
  * Ordem da home pela escada de decisão de compra:
- * Hero (atenção + promessa) → Selos (remove medo) → Estoque (o que ele veio
+ * Hero (atenção + promessa) → Selos (remove medo) → Fundador (o dono, cara da
+ * marca e presença nas redes — confiança logo de cara) → Estoque (o que ele veio
  * ver, o coração da conversão) → Diferenciais (por que aqui) → Garantia 90 dias
  * (remove o maior medo de seminovo) → Equipe (prova de estrutura + voz do dono,
  * confiança) → Contato (a ação: WhatsApp).
@@ -30,6 +32,7 @@ export default async function HomePage() {
       <main>
         <Hero />
         <SelosBar />
+        <Fundador />
         <Destaques veiculos={destaques} total={total} />
         <Diferenciais />
         <Garantia />

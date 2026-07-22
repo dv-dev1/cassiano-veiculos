@@ -11,6 +11,10 @@ export const loja = {
   whatsappLabel: "(83) 99607-1247",
   instagram: "https://www.instagram.com/cassianoveiculosoficial",
   instagramHandle: "@cassianoveiculosoficial",
+  // Instagram PESSOAL do Cassiano (o dono, cara da marca) — diferente do perfil
+  // da loja. Usado na seção do fundador: ele é ativo e interage no dia a dia.
+  instagramCassiano: "https://www.instagram.com/cassiano.of",
+  instagramCassianoHandle: "@cassiano.of",
   endereco:
     "Rodovia BR-230, 14162, Loja 10, Trevo Auto Shop, Cabedelo - PB, CEP 58109-303",
   horario: {

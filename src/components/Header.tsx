@@ -17,9 +17,15 @@ const navLinks = [
   { href: "/#contato", label: "Contato" },
 ];
 
-export function Header() {
+/**
+ * @param solid Força o header opaco (grafite) já no topo. Use em páginas cujo
+ * conteúdo começa em fundo claro — sem isso o nav branco fica ilegível sobre o
+ * areia até a primeira rolagem. A home não precisa: o hero grafite fica atrás.
+ */
+export function Header({ solid = false }: { solid?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const solidLook = solid || scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -39,7 +45,7 @@ export function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-30 transition-[background-color,box-shadow] duration-[400ms] ease-[var(--ease-brand)] ${
-        scrolled
+        solidLook
           ? "bg-secondary/95 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.15)] backdrop-blur-md"
           : "bg-transparent py-5"
       }`}
@@ -73,16 +79,17 @@ export function Header() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={menuOpen}
-            className="grid h-10 w-10 place-items-center rounded-[var(--radius)] text-white lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-[var(--radius)] text-white lg:hidden"
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Menu mobile */}
+      {/* Menu mobile — ancorado logo abaixo da barra (top-full acompanha a
+          altura variável do header, rolado ou não; sem número mágico). */}
       {menuOpen && (
-        <div className="fixed inset-0 top-[64px] z-20 bg-secondary/98 backdrop-blur-md lg:hidden">
+        <div className="absolute inset-x-0 top-full z-20 min-h-[calc(100svh-100%)] overflow-y-auto bg-secondary/98 backdrop-blur-md lg:hidden">
           <nav
             className="flex flex-col gap-1 px-5 py-6"
             aria-label="Menu mobile"
